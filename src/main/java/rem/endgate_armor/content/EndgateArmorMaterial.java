@@ -65,8 +65,10 @@ public class EndgateArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        // This is used for armor textures: textures/models/armor/<name>_layer_1.png
-        return "endgate";
+        // This is used for armor textures: <namespace>:textures/models/armor/<name>_layer_1.png
+        // IMPORTANT: include the namespace, otherwise vanilla defaults to "minecraft" and your
+        // mod's armor textures will never be found.
+        return "endgate_armor:endgate";
     }
 
     @Override
