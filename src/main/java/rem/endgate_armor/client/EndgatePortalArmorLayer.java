@@ -109,7 +109,10 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
         model.setAllVisible(false);
         switch (slot) {
             case HEAD -> {
-                model.head.visible = true;
+                // For helmets, render ONLY the outer "hat" cube.
+                // Rendering the "head" cube makes the portal effect cover the player's face
+                // and reads like a solid block.
+                model.head.visible = false;
                 model.hat.visible = true;
             }
             case CHEST -> {
