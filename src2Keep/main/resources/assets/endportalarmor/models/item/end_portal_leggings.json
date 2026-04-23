@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "endportalarmor:item/end_portal_leggings"
+  }
+}

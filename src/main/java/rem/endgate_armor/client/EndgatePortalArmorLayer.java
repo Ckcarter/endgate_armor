@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import rem.endgate_armor.client.model.OpenFaceHelmetModel;
 import rem.endgate_armor.registry.ModItems;
 
 /**
@@ -27,11 +28,13 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
     private final HumanoidModel<AbstractClientPlayer> innerModel;
     private final HumanoidModel<AbstractClientPlayer> outerModel;
+    private final OpenFaceHelmetModel<AbstractClientPlayer> helmetModel;
 
     public EndgatePortalArmorLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
         super(parent);
         this.innerModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
         this.outerModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
+        this.helmetModel = new OpenFaceHelmetModel<>(OpenFaceHelmetModel.createBodyLayer().bakeRoot());
     }
 
     @Override
@@ -47,7 +50,7 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
         // Render each equipped piece with the proper armor model (inner for legs, outer for others).
         renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.HEAD,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
         renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.CHEST,
                 outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
@@ -110,8 +113,7 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
         switch (slot) {
             case HEAD -> {
                 // For helmets, render ONLY the outer "hat" cube.
-                // Rendering the "head" cube makes the portal effect cover the player's face
-                // and reads like a solid block.
+                // Do NOT render the inner head cube, or the player's face gets covered.
                 model.head.visible = false;
                 model.hat.visible = true;
             }
