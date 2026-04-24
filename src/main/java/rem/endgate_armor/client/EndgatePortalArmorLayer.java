@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import rem.endgate_armor.client.model.OpenFaceHelmetModel;
@@ -21,10 +22,13 @@ import rem.endgate_armor.registry.ModItems;
  * Renders an End-Portal/Gateway style overlay on top of Endgate armor pieces
  * using vanilla portal shaders (RenderType.endPortal()).
  *
- * This is what gives the real "infinite starfield" movement, which cannot be
- * reproduced with animated textures alone.
+ * The gold-trim pass renders last so the armor keeps the Minecraft trim look
+ * even though the animated portal shader is drawn over the normal armor layer.
  */
 public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+
+    private static final ResourceLocation GOLD_TRIM_TEXTURE =
+            new ResourceLocation("endgate_armor", "textures/models/armor/endgate_gold_trim.png");
 
     private final HumanoidModel<AbstractClientPlayer> innerModel;
     private final HumanoidModel<AbstractClientPlayer> outerModel;
@@ -45,21 +49,35 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
         // Only render overlay if the player is wearing at least one Endgate armor piece.
         if (!isWearingAnyEndgate(player)) return;
 
-        // Vanilla portal shader layer. Fullbright-ish, ignores normal armor texture sampling.
-        VertexConsumer vc = bufferSource.getBuffer(RenderType.endPortal());
+        // Animated End Gateway / End Portal pass.
+        VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endPortal());
 
-        // Render each equipped piece with the proper armor model (inner for legs, outer for others).
-        renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.HEAD,
-                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.HEAD,
+                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
 
-        renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.CHEST,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.CHEST,
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
 
-        renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.LEGS,
-                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.LEGS,
+                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.005f);
 
-        renderForSlot(poseStack, vc, packedLight, player, EquipmentSlot.FEET,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.FEET,
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
+
+        // Minecraft-style gold trim pass. Rendered last and scaled slightly larger to prevent z-fighting.
+        VertexConsumer trimConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(GOLD_TRIM_TEXTURE));
+
+        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.HEAD,
+                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
+
+        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.CHEST,
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
+
+        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.LEGS,
+                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.012f);
+
+        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.FEET,
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
     }
 
     private static boolean isWearingAnyEndgate(AbstractClientPlayer player) {
@@ -86,7 +104,7 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
     private void renderForSlot(PoseStack poseStack, VertexConsumer vc, int packedLight, AbstractClientPlayer player,
                                EquipmentSlot slot, HumanoidModel<AbstractClientPlayer> model,
                                float limbSwing, float limbSwingAmount, float ageInTicks,
-                               float netHeadYaw, float headPitch) {
+                               float netHeadYaw, float headPitch, float alpha, float scale) {
 
         if (!isEndgateForSlot(player, slot)) return;
 
@@ -98,12 +116,10 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
         // Only show the parts for this slot (and hide everything else).
         setVisibleForSlot(model, slot);
 
-        // Slight scale-up to avoid z-fighting with the regular armor layer.
         poseStack.pushPose();
-        float s = (slot == EquipmentSlot.LEGS) ? 1.005f : 1.01f;
-        poseStack.scale(s, s, s);
+        poseStack.scale(scale, scale, scale);
 
-        model.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 0.55f);
+        model.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, alpha);
 
         poseStack.popPose();
     }

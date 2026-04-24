@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "endgate_armor:endgate_helmet",
+    "endgate_armor:endgate_chestplate",
+    "endgate_armor:endgate_leggings",
+    "endgate_armor:endgate_boots"
+  ]
+}
