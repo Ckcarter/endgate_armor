@@ -22,7 +22,7 @@ public class TransparentEndgateArmorItem extends ArmorItem {
 
     @Override
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return "endgate_armor:textures/models/armor/transparent_armor.png";
+        return slot == EquipmentSlot.LEGS ? "endgate_armor:textures/models/armor/endgate_layer_2.png" : "endgate_armor:textures/models/armor/endgate_layer_1.png";
     }
 
     @Override

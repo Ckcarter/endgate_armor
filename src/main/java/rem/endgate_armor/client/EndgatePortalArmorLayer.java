@@ -12,23 +12,18 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import rem.endgate_armor.client.model.OpenFaceHelmetModel;
 import rem.endgate_armor.registry.ModItems;
 
 /**
- * Renders an End-Portal/Gateway style overlay on top of Endgate armor pieces
- * using vanilla portal shaders (RenderType.endPortal()).
+ * Clean vanilla-shaped End Portal armor layer.
  *
- * The gold-trim pass renders last so the armor keeps the Minecraft trim look
- * even though the animated portal shader is drawn over the normal armor layer.
+ * No gold trim is rendered. The armor keeps the normal Minecraft armor silhouette,
+ * while RenderType.endPortal() supplies the animated End Portal material.
  */
 public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-
-    private static final ResourceLocation GOLD_TRIM_TEXTURE =
-            new ResourceLocation("endgate_armor", "textures/models/armor/endgate_gold_trim.png");
 
     private final HumanoidModel<AbstractClientPlayer> innerModel;
     private final HumanoidModel<AbstractClientPlayer> outerModel;
@@ -46,38 +41,21 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
                        float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks,
                        float netHeadYaw, float headPitch) {
 
-        // Only render overlay if the player is wearing at least one Endgate armor piece.
         if (!isWearingAnyEndgate(player)) return;
 
-        // Animated End Gateway / End Portal pass.
         VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endPortal());
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.HEAD,
-                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
+                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.CHEST,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.LEGS,
-                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.005f);
+                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.005f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.FEET,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.55f, 1.010f);
-
-        // Minecraft-style gold trim pass. Rendered last and scaled slightly larger to prevent z-fighting.
-        VertexConsumer trimConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(GOLD_TRIM_TEXTURE));
-
-        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.HEAD,
-                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
-
-        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.CHEST,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
-
-        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.LEGS,
-                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.012f);
-
-        renderForSlot(poseStack, trimConsumer, packedLight, player, EquipmentSlot.FEET,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0f, 1.018f);
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
     }
 
     private static boolean isWearingAnyEndgate(AbstractClientPlayer player) {
@@ -108,19 +86,14 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
         if (!isEndgateForSlot(player, slot)) return;
 
-        // Match player pose/animation.
         this.getParentModel().copyPropertiesTo(model);
         model.prepareMobModel(player, limbSwing, limbSwingAmount, 0.0F);
         model.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
-        // Only show the parts for this slot (and hide everything else).
         setVisibleForSlot(model, slot);
 
         poseStack.pushPose();
         poseStack.scale(scale, scale, scale);
-
         model.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, alpha);
-
         poseStack.popPose();
     }
 
@@ -128,8 +101,6 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
         model.setAllVisible(false);
         switch (slot) {
             case HEAD -> {
-                // For helmets, render ONLY the outer "hat" cube.
-                // Do NOT render the inner head cube, or the player's face gets covered.
                 model.head.visible = false;
                 model.hat.visible = true;
             }
