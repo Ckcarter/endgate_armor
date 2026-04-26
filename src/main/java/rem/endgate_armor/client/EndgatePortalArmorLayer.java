@@ -56,10 +56,10 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
                 shortSleeveOuterModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 0.90f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.LEGS,
-                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.005f);
+                innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 0.90f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.FEET,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
+                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 0.98f);
     }
 
     private static boolean isWearingAnyEndgate(AbstractClientPlayer player) {
