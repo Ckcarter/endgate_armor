@@ -15,25 +15,29 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import rem.endgate_armor.client.model.OpenFaceHelmetModel;
+import rem.endgate_armor.client.model.ShortSleeveArmorModel;
 import rem.endgate_armor.registry.ModItems;
 
 /**
  * Clean vanilla-shaped End Portal armor layer.
  *
  * No gold trim is rendered. The armor keeps the normal Minecraft armor silhouette,
- * while RenderType.endPortal() supplies the animated End Portal material.
+ * while RenderType.endGateway() supplies the animated End Gateway material.
+ * Chest arms use a short-sleeve model so the gateway render stops higher on the arm.
  */
 public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
 
     private final HumanoidModel<AbstractClientPlayer> innerModel;
     private final HumanoidModel<AbstractClientPlayer> outerModel;
     private final OpenFaceHelmetModel<AbstractClientPlayer> helmetModel;
+    private final ShortSleeveArmorModel<AbstractClientPlayer> shortSleeveOuterModel;
 
     public EndgatePortalArmorLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
         super(parent);
         this.innerModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
         this.outerModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
         this.helmetModel = new OpenFaceHelmetModel<>(OpenFaceHelmetModel.createBodyLayer().bakeRoot());
+        this.shortSleeveOuterModel = new ShortSleeveArmorModel<>(ShortSleeveArmorModel.createBodyLayer().bakeRoot());
     }
 
     @Override
@@ -43,13 +47,13 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
         if (!isWearingAnyEndgate(player)) return;
 
-        VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endPortal());
+        VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endGateway());
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.HEAD,
                 helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.CHEST,
-                outerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.010f);
+                shortSleeveOuterModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 0.90f);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.LEGS,
                 innerModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82f, 1.005f);
@@ -110,7 +114,7 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
                 model.leftArm.visible = true;
             }
             case LEGS -> {
-                model.body.visible = true;
+                model.body.visible = false;
                 model.rightLeg.visible = true;
                 model.leftLeg.visible = true;
             }
