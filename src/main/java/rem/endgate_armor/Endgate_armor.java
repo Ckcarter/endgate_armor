@@ -12,6 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import rem.endgate_armor.registry.ModCreativeTab;
 import rem.endgate_armor.registry.ModItems;
+import rem.endgate_armor.network.EndgateNetwork;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Endgate_armor.MODID)
@@ -26,6 +27,9 @@ public class Endgate_armor {
         // Register content
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTab.TABS.register(modEventBus);
+
+        // Register network packets for armor abilities
+        EndgateNetwork.register();
 
         // Register configs
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -3,5 +3,7 @@
   "item.endgate_armor.endgate_helmet": "Endgate Helmet",
   "item.endgate_armor.endgate_chestplate": "Endgate Chestplate",
   "item.endgate_armor.endgate_leggings": "Endgate Leggings",
-  "item.endgate_armor.endgate_boots": "Endgate Boots"
+  "item.endgate_armor.endgate_boots": "Endgate Boots",
+  "key.categories.endgate_armor": "Endgate Armor",
+  "key.endgate_armor.teleport": "Endgate Teleport"
 }

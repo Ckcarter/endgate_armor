@@ -1,10 +1,14 @@
 package rem.endgate_armor.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.glfw.GLFW;
 import rem.endgate_armor.Endgate_armor;
 
 /**
@@ -15,9 +19,20 @@ public final class EndgateClientEvents {
 
     private EndgateClientEvents() {}
 
+    public static final KeyMapping TELEPORT_KEY = new KeyMapping(
+            "key.endgate_armor.teleport",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_G,
+            "key.categories.endgate_armor"
+    );
+
+    @SubscribeEvent
+    public static void onRegisterKeys(RegisterKeyMappingsEvent event) {
+        event.register(TELEPORT_KEY);
+    }
+
     @SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        // Player renderers exist for both skin types.
         PlayerRenderer defaultRenderer = event.getSkin("default");
         if (defaultRenderer != null) {
             defaultRenderer.addLayer(new EndgatePortalArmorLayer(defaultRenderer));

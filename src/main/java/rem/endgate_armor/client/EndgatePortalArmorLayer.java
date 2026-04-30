@@ -52,7 +52,7 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
         if (!isWearingAnyEndgate(player)) return;
 
-        VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endPortal());
+        VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endGateway());
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.HEAD,
                 helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82F);
