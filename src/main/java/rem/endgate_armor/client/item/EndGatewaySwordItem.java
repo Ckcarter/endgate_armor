@@ -1,11 +1,12 @@
-package com.che.endgate.item;
+package rem.endgate_armor.client.item;
 
-import com.che.endgate.client.render.EndGatewaySwordRenderer;
+
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import rem.endgate_armor.client.render.EndGatewaySwordRenderer;
 
 import java.util.function.Consumer;
 

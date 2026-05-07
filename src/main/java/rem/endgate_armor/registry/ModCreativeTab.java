@@ -23,6 +23,7 @@ public final class ModCreativeTab {
                         output.accept(ModItems.ENDGATE_CHESTPLATE.get());
                         output.accept(ModItems.ENDGATE_LEGGINGS.get());
                         output.accept(ModItems.ENDGATE_BOOTS.get());
+                        output.accept(ModItems.ENDGATE_SWORD.get());
                     })
                     .build()
     );
