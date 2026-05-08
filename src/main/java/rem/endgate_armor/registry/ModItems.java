@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import rem.endgate_armor.Endgate_armor;
 import rem.endgate_armor.content.EndgateArmorMaterial;
 import rem.endgate_armor.item.TransparentEndgateArmorItem;
-
+import rem.endgate_armor.item.EndgateShieldItem;
 public final class ModItems {
     private ModItems() {}
 
@@ -30,4 +30,7 @@ public final class ModItems {
 
     public static final RegistryObject<Item> ENDGATE_SWORD = ITEMS.register("endgate_sword",
             () -> new SwordItem(Tiers.DIAMOND, 4, -2.4F, new Item.Properties().durability(1561)));
+
+    public static final RegistryObject<Item> ENDGATE_SHIELD = ITEMS.register("endgate_shield",
+            EndgateShieldItem::new);
 }

@@ -30,8 +30,7 @@ public final class EndgateClientEvents {
     public static void onRegisterKeys(RegisterKeyMappingsEvent event) {
         event.register(TELEPORT_KEY);
     }
-
-    @SubscribeEvent
+@SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
         PlayerRenderer defaultRenderer = event.getSkin("default");
         if (defaultRenderer != null) {
