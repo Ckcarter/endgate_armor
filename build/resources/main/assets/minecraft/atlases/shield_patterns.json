@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "minecraft:entity/shield_base"
+    },
+    {
+      "type": "single",
+      "resource": "minecraft:entity/shield_base_nopattern"
+    },
+    {
+      "type": "directory",
+      "source": "entity/shield",
+      "prefix": "entity/shield/"
+    },
+    {
+      "type": "single",
+      "resource": "endgate_armor:entity/endgate_shield"
+    }
+  ]
+}
