@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class TeleportAbilityPacket {
     private static final int COOLDOWN_TICKS = 100; // 5 seconds
-    private static final double MAX_DISTANCE = 16.0D;
+    private static final double MAX_DISTANCE = 35.D;
 
     public static void encode(TeleportAbilityPacket packet, FriendlyByteBuf buffer) {
     }

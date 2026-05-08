@@ -51,7 +51,7 @@ public final class ModEvents {
         if (!isWearingFullSet(player)) return;
 
         // Keep night vision refreshed without screen flicker.
-        player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, true, false, true));
+        player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 260, 0, true, false, true));
     }
 
     @SubscribeEvent

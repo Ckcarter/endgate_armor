@@ -44,7 +44,7 @@ public class EndgateArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getDefenseForType(ArmorItem.Type type) {
-        return DEFENSE.getOrDefault(type, 0);
+        return DEFENSE.getOrDefault(type, 0) * 100;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EndgateArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(Items.DIAMOND);
+        return Ingredient.of(Items.ENDER_PEARL);
     }
 
     @Override
