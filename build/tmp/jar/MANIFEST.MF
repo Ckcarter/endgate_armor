@@ -3,7 +3,7 @@ Specification-Title: endgate_armor
 Specification-Vendor: 
 Specification-Version: 1
 Implementation-Title: endgate_armor
-Implementation-Version: 1.0.1
+Implementation-Version: 1.0.3
 Implementation-Vendor: 
-Implementation-Timestamp: 2026-05-08T17:43:23-0500
+Implementation-Timestamp: 2026-05-09T14:55:12-0500
 

@@ -1,18 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "pattern": [
+    "EDE",
+    "E E",
+    "E E"
+  ],
   "key": {
-    "S": {
-      "item": "minecraft:ender_pearl"
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "D": {
+      "item": "minecraft:nether_star"
     }
   },
-  "pattern": [
-    "SSS",
-    "S S",
-    "S S"
-  ],
-  "result": {
-    "item": "endgate_armor:endgate_leggings"
-  },
-  "show_notification": true
+
+    "result": {
+      "item": "endgate_armor:endgate_leggings"
+    }
+  }
 }

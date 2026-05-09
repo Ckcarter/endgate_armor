@@ -39,7 +39,7 @@ public class EndgateArmorMaterial implements ArmorMaterial {
     @Override
     public int getDurabilityForType(ArmorItem.Type type) {
         // Diamond uses 33 as the base multiplier
-        return DURABILITY_MULTIPLIERS.getOrDefault(type, 0) * 33;
+        return DURABILITY_MULTIPLIERS.getOrDefault(type, 0) * 300;
     }
 
     @Override

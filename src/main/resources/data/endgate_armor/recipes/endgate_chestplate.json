@@ -1,18 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "pattern": [
+    "E E",
+    "EDE",
+    "EEE"
+  ],
   "key": {
-    "S": {
-      "item": "minecraft:ender_pearl"
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "D": {
+      "item": "minecraft:nether_star"
     }
   },
-  "pattern": [
-    "S S",
-    "SSS",
-    "SSS"
-  ],
+
   "result": {
     "item": "endgate_armor:endgate_chestplate"
-  },
-  "show_notification": true
+  }
 }

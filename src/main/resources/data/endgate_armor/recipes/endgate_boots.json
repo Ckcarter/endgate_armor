@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EDE",
+    "E E",
+    "   "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "D": {
+      "item": "minecraft:nether_star"
+    }
+  },
+
+  "result": {
+    "item": "endgate_armor:endgate_boots"
+  }
+}

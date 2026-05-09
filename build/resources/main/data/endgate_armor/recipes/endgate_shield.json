@@ -7,10 +7,10 @@
   ],
   "key": {
     "P": {
-      "item": "minecraft:ender_pearl"
+      "item": "minecraft:ender_eye"
     },
     "S": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:nether_star"
     }
   },
   "result": {

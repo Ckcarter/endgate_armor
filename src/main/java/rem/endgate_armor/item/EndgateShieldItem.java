@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class EndgateShieldItem extends ShieldItem {
 
     public EndgateShieldItem() {
-        super(new Item.Properties().durability(672));
+        super(new Item.Properties().durability(1200));
     }
 
     @Override
