@@ -8,6 +8,7 @@
   "key.endgate_armor.teleport": "Endgate Teleport",
   "item.endgate_armor.endgate_sword": "End Gateway Sword",
   "item.endgate_armor.endgate_shield": "Endgate Shield",
-  "block.endgate_armor.item_generator": "Gold Generator",
-  "container.endgate_armor.item_generator": "Gold Generator"
+  "block.endgate_armor.item_generator": "Cosmic Generator",
+  "container.endgate_armor.item_generator": "Cosmic Generator",
+  "item.endgate_armor.cosmic_ingot": "Cosmic Ingot"
 }

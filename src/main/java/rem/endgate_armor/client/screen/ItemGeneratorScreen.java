@@ -40,7 +40,7 @@ public class ItemGeneratorScreen extends AbstractContainerScreen<ItemGeneratorMe
 
         int secondsLeft = Math.max(0, (menu.getMaxProgress() - menu.getProgress()) / 20);
         graphics.drawString(this.font, "FE: " + menu.getEnergy() + "/" + menu.getMaxEnergy(), 8, 20, 0xFFFFFF, false);
-        graphics.drawString(this.font, "Gold in: " + secondsLeft + "s", 8, 32, 0xFFFFFF, false);
+        graphics.drawString(this.font, "Done in: " + secondsLeft + "s", 8, 32, 0xFFFFFF, false);
     }
 
     @Override

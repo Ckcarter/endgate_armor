@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "endgate_armor:item/cosmic_ingot"
+  }
+}

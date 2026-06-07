@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rem.endgate_armor.menu.ItemGeneratorMenu;
 import rem.endgate_armor.registry.ModBlockEntities;
+import rem.endgate_armor.registry.ModItems;
 
 public class ItemGeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -112,14 +113,14 @@ public class ItemGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
     private boolean canOutputGold() {
         ItemStack current = itemHandler.getStackInSlot(0);
-        return current.isEmpty() || (current.is(Items.GOLD_INGOT) && current.getCount() < current.getMaxStackSize());
+        return current.isEmpty() || (current.is(ModItems.COSMIC_INGOT.get()) && current.getCount() < current.getMaxStackSize());
     }
 
     private void insertGold() {
         ItemStack current = itemHandler.getStackInSlot(0);
         if (current.isEmpty()) {
-            itemHandler.setStackInSlot(0, new ItemStack(Items.GOLD_INGOT, 1));
-        } else if (current.is(Items.GOLD_INGOT) && current.getCount() < current.getMaxStackSize()) {
+            itemHandler.setStackInSlot(0, new ItemStack(ModItems.COSMIC_INGOT.get(), 1));
+        } else if (current.is(ModItems.COSMIC_INGOT.get()) && current.getCount() < current.getMaxStackSize()) {
             current.grow(1);
             itemHandler.setStackInSlot(0, current);
         }

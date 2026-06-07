@@ -34,6 +34,7 @@ public final class ModItems {
     public static final RegistryObject<Item> ENDGATE_SHIELD = ITEMS.register("endgate_shield",
             EndgateShieldItem::new);
 
-
+    public static final RegistryObject<Item> COSMIC_INGOT = ITEMS.register("cosmic_ingot",
+            () -> new Item(new Item.Properties()));
 
 }
