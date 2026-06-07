@@ -2,14 +2,18 @@ package rem.endgate_armor.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 import rem.endgate_armor.Endgate_armor;
+import rem.endgate_armor.client.screen.ItemGeneratorScreen;
+import rem.endgate_armor.registry.ModMenus;
 
 /**
  * Client-only: inject a portal-style overlay layer onto player renderers.
@@ -30,7 +34,15 @@ public final class EndgateClientEvents {
     public static void onRegisterKeys(RegisterKeyMappingsEvent event) {
         event.register(TELEPORT_KEY);
     }
-@SubscribeEvent
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() ->
+                MenuScreens.register(ModMenus.ITEM_GENERATOR_MENU.get(), ItemGeneratorScreen::new)
+        );
+    }
+
+    @SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
         PlayerRenderer defaultRenderer = event.getSkin("default");
         if (defaultRenderer != null) {

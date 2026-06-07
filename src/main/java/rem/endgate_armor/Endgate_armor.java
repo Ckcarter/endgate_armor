@@ -10,11 +10,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import rem.endgate_armor.network.EndgateNetwork;
+import rem.endgate_armor.registry.ModBlockEntities;
+import rem.endgate_armor.registry.ModBlocks;
 import rem.endgate_armor.registry.ModCreativeTab;
 import rem.endgate_armor.registry.ModItems;
-import rem.endgate_armor.network.EndgateNetwork;
+import rem.endgate_armor.registry.ModMenus;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Endgate_armor.MODID)
 public class Endgate_armor {
 
@@ -24,17 +26,16 @@ public class Endgate_armor {
     public Endgate_armor() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register content
         ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModMenus.MENUS.register(modEventBus);
         ModCreativeTab.TABS.register(modEventBus);
 
-        // Register network packets for armor abilities
         EndgateNetwork.register();
 
-        // Register configs
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
