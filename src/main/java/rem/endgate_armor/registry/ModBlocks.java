@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import rem.endgate_armor.Endgate_armor;
 import rem.endgate_armor.block.ItemGeneratorBlock;
+import rem.endgate_armor.block.CreativePowerSupplyBlock;
 
 public final class ModBlocks {
     private ModBlocks() {}
@@ -21,6 +22,13 @@ public final class ModBlocks {
             () -> new ItemGeneratorBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL)
                     .strength(4.0F, 6.0F)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> CREATIVE_POWER_SUPPLY = registerBlock("creative_power_supply",
+            () -> new CreativePowerSupplyBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(5.0F, 6.0F)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
 

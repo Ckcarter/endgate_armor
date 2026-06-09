@@ -29,8 +29,8 @@ import rem.endgate_armor.registry.ModItems;
 
 public class ItemGeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
-    // 20 minutes at 20 ticks per second.
-    public static final int GENERATE_TIME_TICKS = 20 * 60 * 20;
+    // 5 minutes at 20 ticks per second.
+    public static final int GENERATE_TIME_TICKS = 5 * 60 * 20;
 
     public static final int ENERGY_CAPACITY = 100_000;
     public static final int MAX_RECEIVE = 1_000;
