@@ -37,4 +37,7 @@ public final class ModItems {
     public static final RegistryObject<Item> COSMIC_INGOT = ITEMS.register("cosmic_ingot",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> COSMIC_DUST = ITEMS.register("cosmic_dust",
+            () -> new Item(new Item.Properties()));
+
 }

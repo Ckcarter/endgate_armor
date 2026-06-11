@@ -26,6 +26,7 @@ public final class ModCreativeTab {
                         output.accept(ModItems.ENDGATE_SWORD.get());
                         output.accept(ModItems.ENDGATE_SHIELD.get());
                         output.accept(ModItems.COSMIC_INGOT.get());
+                        output.accept(ModItems.COSMIC_DUST.get());
                         output.accept(ModBlocks.ITEM_GENERATOR.get());
                         output.accept(ModBlocks.CREATIVE_POWER_SUPPLY.get());
                     })

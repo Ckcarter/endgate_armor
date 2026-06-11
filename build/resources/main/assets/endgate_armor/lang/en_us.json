@@ -11,5 +11,6 @@
   "block.endgate_armor.item_generator": "Cosmic Generator",
   "container.endgate_armor.item_generator": "Cosmic Generator",
   "item.endgate_armor.cosmic_ingot": "Cosmic Ingot",
+  "item.endgate_armor.cosmic_dust": "Cosmic Dust",
   "block.endgate_armor.creative_power_supply": "Creative Power Supply"
 }
