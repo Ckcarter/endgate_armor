@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "endgate_armor:block/item_generator" }
+    "": { "model": "endgate_armor:block/cosmic_generator" }
   }
 }

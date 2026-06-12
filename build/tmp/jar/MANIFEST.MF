@@ -5,5 +5,5 @@ Specification-Version: 1
 Implementation-Title: endgate_armor
 Implementation-Version: 1.2.3
 Implementation-Vendor: 
-Implementation-Timestamp: 2026-06-09T19:34:42-0500
+Implementation-Timestamp: 2026-06-11T18:26:47-0500
 
