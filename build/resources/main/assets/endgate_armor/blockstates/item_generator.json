@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "endgate_armor:block/cosmic_generator" }
+    "facing=north": { "model": "endgate_armor:block/cosmic_generator" },
+    "facing=east": { "model": "endgate_armor:block/cosmic_generator", "y": 90 },
+    "facing=south": { "model": "endgate_armor:block/cosmic_generator", "y": 180 },
+    "facing=west": { "model": "endgate_armor:block/cosmic_generator", "y": 270 }
   }
 }
