@@ -23,7 +23,7 @@ public final class ModBlocks {
                     .mapColor(MapColor.METAL)
                     .strength(4.0F, 6.0F)
                     .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
+                    .requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> CREATIVE_POWER_SUPPLY = registerBlock("creative_power_supply",
             () -> new CreativePowerSupplyBlock(BlockBehaviour.Properties.of()
