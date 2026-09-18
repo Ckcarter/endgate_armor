@@ -7,20 +7,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rem.endgate_armor.Endgate_armor;
 
-@Mod.EventBusSubscriber(
-        modid = Endgate_armor.MODID,
-        bus = Mod.EventBusSubscriber.Bus.MOD,
-        value = Dist.CLIENT
-)
-public class ClientRenderEvents {
+/** Register the actual vanilla End Gateway shader on both player skin variants. */
+@Mod.EventBusSubscriber(modid = Endgate_armor.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public final class ClientRenderEvents {
+    private ClientRenderEvents() {}
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
         for (String skin : event.getSkins()) {
             PlayerRenderer renderer = event.getSkin(skin);
-
             if (renderer != null) {
-                renderer.addLayer(new EndgateArmorRenderLayer(renderer));
+                renderer.addLayer(new EndgatePortalArmorLayer(renderer));
             }
         }
     }

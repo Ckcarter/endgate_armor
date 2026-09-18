@@ -42,16 +42,4 @@ public final class EndgateClientEvents {
         );
     }
 
-    @SubscribeEvent
-    public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        PlayerRenderer defaultRenderer = event.getSkin("default");
-        if (defaultRenderer != null) {
-            defaultRenderer.addLayer(new EndgatePortalArmorLayer(defaultRenderer));
-        }
-
-        PlayerRenderer slimRenderer = event.getSkin("slim");
-        if (slimRenderer != null) {
-            slimRenderer.addLayer(new EndgatePortalArmorLayer(slimRenderer));
-        }
-    }
 }

@@ -2,8 +2,8 @@ package rem.endgate_armor.registry;
 
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
+import rem.endgate_armor.item.EndGatewaySwordItem;
+
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -29,7 +29,7 @@ public final class ModItems {
             () -> new TransparentEndgateArmorItem(EndgateArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryObject<Item> ENDGATE_SWORD = ITEMS.register("endgate_sword",
-            () -> new SwordItem(Tiers.DIAMOND, 4, -2.4F, new Item.Properties().durability(1561)));
+            EndGatewaySwordItem::new);
 
     public static final RegistryObject<Item> ENDGATE_SHIELD = ITEMS.register("endgate_shield",
             EndgateShieldItem::new);

@@ -1,6 +1,8 @@
 package rem.endgate_armor.item;
 
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import rem.endgate_armor.client.render.EndGatewayArmorIconRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,6 +31,13 @@ public class TransparentEndgateArmorItem extends ArmorItem {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private OpenFaceHelmetModel<LivingEntity> openFaceHelmetModel;
+            private EndGatewayArmorIconRenderer iconRenderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (iconRenderer == null) iconRenderer = new EndGatewayArmorIconRenderer();
+                return iconRenderer;
+            }
 
             @SuppressWarnings("unchecked")
             @Override

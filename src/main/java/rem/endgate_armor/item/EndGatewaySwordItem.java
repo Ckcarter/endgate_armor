@@ -23,11 +23,11 @@ public class EndGatewaySwordItem extends SwordItem {
 
         consumer.accept(new IClientItemExtensions() {
 
-            private final EndGatewaySwordRenderer renderer =
-                    new EndGatewaySwordRenderer();
+            private EndGatewaySwordRenderer renderer;
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) renderer = new EndGatewaySwordRenderer();
                 return renderer;
             }
         });

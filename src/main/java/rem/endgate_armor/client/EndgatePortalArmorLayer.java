@@ -52,19 +52,20 @@ public final class EndgatePortalArmorLayer extends RenderLayer<AbstractClientPla
 
         if (!isWearingAnyEndgate(player)) return;
 
+        // The real vanilla gateway shader: not a PNG animation or a purple armor texture.
         VertexConsumer portalConsumer = bufferSource.getBuffer(RenderType.endGateway());
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.HEAD,
-                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82F);
+                helmetModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0F);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.CHEST,
-                shortSleeveChestModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82F);
+                shortSleeveChestModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0F);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.LEGS,
-                innerArmorModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82F);
+                innerArmorModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0F);
 
         renderForSlot(poseStack, portalConsumer, packedLight, player, EquipmentSlot.FEET,
-                bootsModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 0.82F);
+                bootsModel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, 1.0F);
     }
 
     private static boolean isWearingAnyEndgate(AbstractClientPlayer player) {
