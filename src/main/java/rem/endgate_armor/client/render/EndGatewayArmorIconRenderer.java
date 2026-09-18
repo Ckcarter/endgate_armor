@@ -39,13 +39,14 @@ public final class EndGatewayArmorIconRenderer extends BlockEntityWithoutLevelRe
         boolean[][] mask = masks.computeIfAbsent(piece, this::loadMask);
         if (mask == null) return;
         poseStack.pushPose();
-        // Center the 16x16 silhouette on the hand's item pivot instead of
-        // drawing it from the lower-left corner. This affects held items only.
-        if (context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND
-                || context == ItemDisplayContext.FIRST_PERSON_LEFT_HAND
-                || context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND
-                || context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND) {
-            poseStack.translate(-0.5D, -0.5D, 0.0D);
+        // Vanilla generated-item geometry is centered on the model pivot.
+        // Our shader silhouette is authored from (0,0) to (1,1), so center it
+        // in either hand; do not add a two-block vertical offset.
+        if (context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND
+                || context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND
+                || context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND
+                || context == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
+            poseStack.translate(-0.0D, 0.0D, 0.5D);
         }
         VertexConsumer vertices = buffers.getBuffer(RenderType.endGateway());
         Matrix4f matrix = poseStack.last().pose();
